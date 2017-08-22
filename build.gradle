@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin:'com.github.johnrengelman.shadow'
+apply plugin: 'application'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+def vertxVer = "3.4.2"
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.13'
+
+    compile "io.vertx:vertx-core:$vertxVer"
+
+    testCompile 'junit:junit:4.12'
+}
+
+mainClassName = 'io.vertx.core.Launcher'
+
+shadowJar {
+    manifest {
+        attributes 'Main-Verticle': 'TcpServer'
+    }
+    mergeServiceFiles {
+        include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+    }
+    version = System.getenv().getOrDefault("APP_VERSION", "1.0.0")
+    classifier = null
+}
