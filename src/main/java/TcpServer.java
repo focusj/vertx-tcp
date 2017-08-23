@@ -2,7 +2,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetServerOptions;
-import io.vertx.core.net.SocketAddress;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TcpServer extends AbstractVerticle {
@@ -16,7 +16,10 @@ public class TcpServer extends AbstractVerticle {
 
             netServer.connectHandler(socket -> {
                 String address = socket.remoteAddress().host() + ":" + socket.remoteAddress().port();
-                System.out.println(counter.getAndAdd(1) + " connection " + "[" + address + "]" + " connects in...");
+                final int i = counter.getAndAdd(1);
+                if (i % 1000 == 0) {
+                    System.out.println(i + " connections connects in...");
+                }
 
                 socket.handler(buffer -> {
                     socket.write("pong");

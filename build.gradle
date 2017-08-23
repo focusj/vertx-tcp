@@ -27,14 +27,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-mainClassName = 'io.vertx.core.Launcher'
+mainClassName = 'TcpClient'
 
 shadowJar {
     manifest {
-        attributes 'Main-Verticle': 'TcpServer'
-    }
-    mergeServiceFiles {
-        include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+        attributes 'Main-Verticle': 'TcpClient'
     }
     version = System.getenv().getOrDefault("APP_VERSION", "1.0.0")
     classifier = null

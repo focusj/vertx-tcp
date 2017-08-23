@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Main-Verticle: TcpServer
-Main-Class: io.vertx.core.Launcher
+Main-Verticle: TcpClient
+Main-Class: TcpClient
 
