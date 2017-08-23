@@ -9,12 +9,13 @@ import java.util.stream.Stream;
 
 public class TcpClient {
 
-    private static List<NetSocket> sockets = new ArrayList<>(1000000);
+    private static List<NetSocket> sockets = new ArrayList<>(100000);
 
     public static void main(String[] args) {
         Vertx vertx = Vertx.vertx();
-        Stream.of("192.168.99.10", "192.168.99.11", "192.168.99.12", "192.168.99.13", "192.168.99.14", "192.168.99.15", "192.168.99.16", "192.168.99.17", "192.168.99.18", "192.168.99.19",
-            "192.168.88.10", "192.168.88.11", "192.168.88.12", "192.168.88.13", "192.168.88.14", "192.168.88.15", "192.168.88.16", "192.168.88.17", "192.168.88.18", "192.168.88.19").forEach(localAddress -> {
+        Stream.of("192.168.31.180", "192.168.31.181", "192.168.31.182", "192.168.31.183", "192.168.31.184",
+            "192.168.31.185", "192.168.31.186", "192.168.31.187", "192.168.31.188", "192.168.31.189"
+        ).forEach(localAddress -> {
             for (int i = 0; i < 50000; i++) {
                 try {
                     Thread.sleep(1);
@@ -23,6 +24,7 @@ public class TcpClient {
                 createNetClient(vertx, "127.0.0.1", localAddress);
             }
         });
+
     }
 
     private static void createNetClient(final Vertx vertx, final String server, final String local) {
